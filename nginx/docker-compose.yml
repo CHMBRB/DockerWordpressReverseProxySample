@@ -1,0 +1,29 @@
+services:
+  gateway:
+    image: nginx:alpine
+    hostname: gateway
+    container_name: gateway
+    restart: always
+    volumes:
+      # mount our machines /var/log/nginx directory to the container (for convenience)
+      - /var/log/nginx:/var/log/nginx:rw
+      # default nginx config (modify if necessary)
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      # default nginx app service reverse proxy config (modify if necessary)
+      - ./conf.d/:/etc/nginx/conf.d/
+      # certificates for https services (optional)
+      # - ./certs/cert.pem:/etc/nginx/cert.pem:ro
+      # - ./certs/private.key:/etc/nginx/cert.key:ro
+    networks:
+      - default-network
+    ports:
+      # http port for wordpress container
+      - 80:80
+      # https (optional)
+      # - 443:443
+      # http port for adminer container (may require modification if upgrading http -> https)
+      - 8080:8080
+
+networks:
+  default-network:
+    external: true

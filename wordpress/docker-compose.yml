@@ -1,0 +1,30 @@
+services:
+  app:
+    image: wordpress:latest
+    hostname: app
+    container_name: app
+    restart: unless-stopped
+    volumes:
+      - data:/var/www/html
+      - ./plugins:/var/www/html/wp-content/plugins
+      - ./themes:/var/www/html/wp-content/themes
+      # mount a custom wp-config.php file (if necessary)
+      # - ./wp-config.php:/var/www/html/wp-config.php
+    networks:
+      - default-network
+    environment:
+      # for a complete variable reference: https://hub.docker.com/_/wordpress
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: mysqldev
+      WORDPRESS_DB_PASSWORD: mysqldevpassword1!
+      WORDPRESS_DB_NAME: defaultdb
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_REDIS_HOST: redis
+      WORDPRESS_DEBUG: 1
+
+volumes:
+  data:
+
+networks:
+  default-network:
+    external: true
