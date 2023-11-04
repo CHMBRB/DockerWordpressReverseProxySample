@@ -23,6 +23,8 @@ services:
       # - 443:443
       # http port for adminer container (may require modification if upgrading http -> https)
       - 8080:8080
+      # http port for cloudflare redis viewer (may require modification if upgrading http -> https)
+      - 8001:8001
 
 networks:
   default-network:

@@ -1,0 +1,23 @@
+services:
+  redis:
+    # image: redis:alpine
+    image: redis/redis-stack:latest
+    hostname: redis
+    container_name: redis
+    restart: unless-stopped
+    volumes:
+     - data:/data
+    networks:
+      - default-network
+    expose:
+      - 6379
+      - 8001
+    environment:
+      REDIS_ARGS: "--maxmemory 50mb --maxmemory-policy allkeys-lru"
+
+volumes:
+  data:
+
+networks:
+  default-network:
+    external: true
