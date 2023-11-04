@@ -89,6 +89,16 @@ $> docker volume ls
 $> docker volume rm $VOLUME_NAME
 ```
 
+### Accessing Applications
+
+To access the running applications, use a web browser on your machine and navigate to:
+- localhost:80 (or just localhost) - To access the Wordpress Application
+- localhost:8080 - To access the Adminer Application
+- localhost:8001 - To access the Redis Stack Application
+
+Alternatively, a separate device attached to the same network may access the services by navigating to the LAN IP address of the host development machine with the corresponding service port:
+- 192.168.x.x:{PORT}
+
 ### Extras
 
 In order to make use of the Redis instance, Wordpress requires the "Redis Object Cache" plugin By Till Krüss. Once Wordpress has been installed, navigate to the plugins section and search for "redis." This plugin should appear near the top of the search results.
